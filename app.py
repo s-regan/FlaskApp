@@ -1,5 +1,6 @@
 from flask import Flask
 from datetime import datetime
+from flask import render_template
 import re
 
 app = Flask(__name__)
@@ -7,7 +8,7 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return "Hello, Flask!"
-
+'''
 @app.route("/hello/<name>")
 def hello_there(name):
     now = datetime.now()
@@ -23,4 +24,13 @@ def hello_there(name):
         clean_name = "Friend"
 
     content = "Hello there, " + clean_name + "! It's " + formatted_now
-    return content
+    return content'''
+
+@app.route("/hello/")
+@app.route("/hello/<name>")
+def hello_there(name = None):
+    return render_template(
+        "hello_there.html",
+        name=name,
+        date=datetime.now()
+    )
